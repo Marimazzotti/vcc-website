@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Velvet Curtain Collective — Prague Musical Theatre</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* ── Brand (global) ── */
+    --purple:        #530e60;   /* primary brand colour */
+    --purple-mid:    #7a1590;   /* slightly lighter for hover/accents */
+    --purple-light:  #a84fbe;   /* muted accent, badges */
+    --purple-tint:   #f5edf7;   /* very pale tint for section bgs */
+    --hero-accent:   #c97de0;   /* hero "Collective" purple, used across headers */
+
+    --ink:           #1a0a1e;   /* near-black, purple-toned */
+    --mid:           #7a6080;   /* muted secondary text */
+    --border:        rgba(83,14,96,0.13);
+    --white:         #FFFFFF;
+    --off-white:     #faf6fb;   /* barely-there purple white */
+
+    /* ── Show: Cabaret of Broken Dolls palette ── */
+    --show-mint-pale:  #DBF5DE;
+    --show-mint:       #A6F5DC;
+    --show-blush:      #F3BCC2;
+    --show-navy:       #00183C;
+    --red-detoned:     #9e3a3a;   /* muted/detoned red, drawn from hero blob palette */
+
+    /* ── Legacy aliases ── */
+    --crimson:      var(--show-blush);
+    --deep-crimson: #d9939c;
+    --gold:         var(--purple);
+    --pale-gold:    var(--purple-mid);
+    --ivory:        var(--white);
+    --velvet:       var(--off-white);
+    --velvet-mid:   var(--purple-tint);
+    --velvet-light: var(--purple-light);
+    --smoke:        var(--mid);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--white);
+    color: var(--ink);
+    font-family: 'Cormorant Garamond', serif;
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* ── GRAIN OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.12;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 1.5rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #FFFFFF;
+    transition: background 0.4s;
+  }
+
+  nav.scrolled {
+    background: #FFFFFF;
+    border-bottom: 1px solid rgba(83,14,96,0.1);
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--purple);
+    text-transform: uppercase;
+  }
+
+  .nav-logo span {
+    display: block;
+    font-size: 0.65rem;
+    font-weight: 400;
+    letter-spacing: 0.4em;
+    color: var(--mid);
+    font-family: 'Cormorant Garamond', serif;
+    margin-top: 2px;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+    opacity: 0.6;
+    transition: opacity 0.3s, color 0.3s;
+    position: relative;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--purple);
+    transition: width 0.3s;
+  }
+
+  .nav-links a:hover { opacity: 1; color: var(--purple); }
+  .nav-links a:hover::after { width: 100%; }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background: #2a0632;
+    overflow: hidden;
+  }
+
+  /* Wavy animated blobs */
+  .hero-blob {
+    position: absolute;
+    border-radius: 40% 60% 55% 45% / 50% 45% 55% 50%;
+    filter: blur(72px);
+    opacity: 0.75;
+    will-change: transform;
+  }
+  .hero-blob-1 {
+    width: 75vw; height: 65vh;
+    top: -15%; left: -10%;
+    background: radial-gradient(ellipse at 40% 50%, #530e60 0%, #3b0847 60%, transparent 100%);
+    animation: blobDrift1 18s ease-in-out infinite alternate;
+  }
+  .hero-blob-2 {
+    width: 60vw; height: 70vh;
+    bottom: -20%; right: -10%;
+    background: radial-gradient(ellipse at 55% 45%, #7a1590 0%, #530e60 50%, transparent 100%);
+    animation: blobDrift2 22s ease-in-out infinite alternate;
+  }
+  .hero-blob-3 {
+    width: 50vw; height: 55vh;
+    top: 20%; left: 30%;
+    background: radial-gradient(ellipse at 50% 50%, #3b0847 0%, #1e0329 70%, transparent 100%);
+    animation: blobDrift3 16s ease-in-out infinite alternate;
+  }
+  .hero-blob-4 {
+    width: 35vw; height: 40vh;
+    top: 5%; right: 5%;
+    background: radial-gradient(ellipse at 40% 40%, #8c1fa8 0%, #530e60 55%, transparent 100%);
+    opacity: 0.45;
+    animation: blobDrift4 25s ease-in-out infinite alternate;
+  }
+  .hero-blob-5 {
+    width: 45vw; height: 50vh;
+    bottom: 5%; left: 10%;
+    background: radial-gradient(ellipse at 45% 55%, #c0152a 0%, #8b0e1e 45%, #4a0510 75%, transparent 100%);
+    opacity: 0.45;
+    animation: blobDrift5 20s ease-in-out infinite alternate;
+  }
+  .hero-blob-6 {
+    width: 38vw; height: 42vh;
+    top: 15%; right: 20%;
+    background: radial-gradient(ellipse at 55% 40%, #d4192f 0%, #9e1020 50%, #3d040e 80%, transparent 100%);
+    opacity: 0.38;
+    animation: blobDrift6 24s ease-in-out infinite alternate;
+  }
+
+  @keyframes blobDrift6 {
+    0%   { transform: translate(0, 0) rotate(0deg) scale(1); }
+    35%  { transform: translate(-5%, 7%) rotate(-14deg) scale(1.08); }
+    70%  { transform: translate(7%, -3%) rotate(9deg) scale(0.94); }
+    100% { transform: translate(-3%, -8%) rotate(-20deg) scale(1.05); }
+  }
+
+  @keyframes blobDrift5 {
+    0%   { transform: translate(0, 0) rotate(0deg) scale(1); }
+    40%  { transform: translate(6%, -5%) rotate(12deg) scale(1.07); }
+    70%  { transform: translate(-4%, 4%) rotate(-8deg) scale(0.96); }
+    100% { transform: translate(8%, 6%) rotate(18deg) scale(1.1); }
+  }
+
+  @keyframes blobDrift1 {
+    0%   { transform: translate(0, 0) rotate(0deg) scale(1); }
+    33%  { transform: translate(4%, 6%) rotate(8deg) scale(1.05); }
+    66%  { transform: translate(-3%, 3%) rotate(-5deg) scale(0.97); }
+    100% { transform: translate(6%, -4%) rotate(12deg) scale(1.08); }
+  }
+  @keyframes blobDrift2 {
+    0%   { transform: translate(0, 0) rotate(0deg) scale(1); }
+    33%  { transform: translate(-5%, -4%) rotate(-10deg) scale(1.06); }
+    66%  { transform: translate(3%, -7%) rotate(6deg) scale(0.95); }
+    100% { transform: translate(-7%, 5%) rotate(-14deg) scale(1.04); }
+  }
+  @keyframes blobDrift3 {
+    0%   { transform: translate(0, 0) rotate(0deg) scale(1); }
+    50%  { transform: translate(-6%, 8%) rotate(15deg) scale(1.1); }
+    100% { transform: translate(5%, -5%) rotate(-10deg) scale(0.93); }
+  }
+  @keyframes blobDrift4 {
+    0%   { transform: translate(0, 0) rotate(0deg); }
+    50%  { transform: translate(-8%, 10%) rotate(20deg); }
+    100% { transform: translate(6%, -8%) rotate(-15deg); }
+  }
+
+  /* Curtain drapes */
+  .curtain-left, .curtain-right {
+    position: absolute;
+    top: 0;
+    width: 280px;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .curtain-left {
+    left: 0;
+    background: linear-gradient(to right, rgba(20,2,26,0.85) 0%, rgba(42,6,50,0.5) 55%, transparent 100%);
+    clip-path: polygon(0 0, 100% 0, 85% 30%, 100% 60%, 80% 100%, 0 100%);
+  }
+
+  .curtain-right {
+    right: 0;
+    background: linear-gradient(to left, rgba(20,2,26,0.85) 0%, rgba(42,6,50,0.5) 55%, transparent 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 20% 100%, 0% 60%, 15% 30%);
+  }
+
+  /* Spotlight glow */
+  .spotlight {
+    position: absolute;
+    top: -30%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 800px;
+    background: radial-gradient(ellipse at top, rgba(200,120,230,0.07) 0%, transparent 65%);
+    pointer-events: none;
+    z-index: 1;
+    animation: flicker 8s infinite;
+  }
+
+  @keyframes flicker {
+    0%, 100% { opacity: 1; }
+    45% { opacity: 0.9; }
+    46% { opacity: 0.75; }
+    47% { opacity: 0.9; }
+    92% { opacity: 1; }
+    93% { opacity: 0.85; }
+    94% { opacity: 1; }
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 0 2rem;
+    animation: heroReveal 1.6s cubic-bezier(0.22,1,0.36,1) forwards;
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  @keyframes heroReveal {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-eyebrow {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.55em;
+    text-transform: uppercase;
+    color: rgba(220,180,230,0.75);
+    margin-bottom: 2rem;
+    opacity: 1;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(4rem, 9vw, 9rem);
+    font-weight: 900;
+    line-height: 0.9;
+    color: #ffffff;
+    text-shadow: 0 2px 40px rgba(0,0,0,0.4);
+    margin-bottom: 0.1em;
+  }
+
+  .hero-title .line2 {
+    display: block;
+    font-style: italic;
+    color: #c97de0;
+    font-size: clamp(3rem, 7vw, 7rem);
+  }
+
+  .hero-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1rem, 2vw, 1.35rem);
+    font-weight: 300;
+    font-style: italic;
+    color: rgba(220,190,228,0.75);
+    margin: 2rem auto 3.5rem;
+    max-width: 520px;
+    letter-spacing: 0.05em;
+    line-height: 1.7;
+    opacity: 0.85;
+  }
+
+  .hero-cta {
+    display: inline-block;
+    padding: 1rem 3rem;
+    border: 1px solid rgba(220,180,230,0.6);
+    color: rgba(220,180,230,0.9);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    transition: color 0.4s;
+  }
+
+  .hero-cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(220,180,230,0.15);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  .hero-cta:hover { color: #ffffff; }
+  .hero-cta:hover::before { transform: scaleX(1); }
+
+  .hero-cta span { position: relative; z-index: 1; }
+
+  .scroll-indicator {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0.4;
+    animation: fadeInUp 2s 1.5s forwards;
+    opacity: 0;
+  }
+
+  @keyframes fadeInUp {
+    to { opacity: 0.4; }
+  }
+
+  .scroll-indicator span {
+    font-size: 0.65rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: rgba(220,180,230,0.5);
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 50px;
+    background: linear-gradient(to bottom, rgba(220,180,230,0.5), transparent);
+    animation: scrollPulse 2s infinite;
+  }
+
+  @keyframes scrollPulse {
+    0% { transform: scaleY(0); transform-origin: top; }
+    50% { transform: scaleY(1); transform-origin: top; }
+    51% { transform: scaleY(1); transform-origin: bottom; }
+    100% { transform: scaleY(0); transform-origin: bottom; }
+  }
+
+  /* ── DIVIDER ── */
+  .ornamental-divider {
+    text-align: center;
+    padding: 1rem 0;
+    color: var(--purple);
+    font-size: 1.2rem;
+    opacity: 0.25;
+    letter-spacing: 1em;
+    user-select: none;
+  }
+
+  /* ── SHOW PROMO ── */
+  #show {
+    padding: 8rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #show {
+    background: #FFFFFF;
+  }
+  #show::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: none;
+  }
+
+  .show-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .show-poster {
+    position: relative;
+  }
+
+  .poster-frame {
+    position: relative;
+    aspect-ratio: 2/3;
+    background: #ede6f5;
+    border: 1px solid rgba(166,245,220,0.4);
+    overflow: hidden;
+  }
+
+  .poster-frame::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 70% 55% at 20% 25%, rgba(243,188,194,0.85) 0%, transparent 65%),
+      radial-gradient(ellipse 60% 50% at 80% 15%, rgba(219,245,222,0.80) 0%, transparent 60%),
+      radial-gradient(ellipse 65% 60% at 75% 75%, rgba(166,245,220,0.75) 0%, transparent 60%),
+      radial-gradient(ellipse 55% 50% at 15% 80%, rgba(200,185,235,0.80) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 45% at 50% 50%, rgba(180,210,240,0.70) 0%, transparent 65%);
+    filter: blur(28px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .poster-frame::before {
+    content: '';
+    position: absolute;
+    inset: 8px;
+    border: 1px solid rgba(74,32,96,0.12);
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .poster-visual {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem 1.5rem;
+    gap: 0.75rem;
+    text-align: center;
+    z-index: 1;
+  }
+
+  .poster-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: #2a1a3e;
+    line-height: 1.1;
+    margin-bottom: 0;
+    text-shadow: 0 1px 12px rgba(255,255,255,0.5);
+  }
+
+  .poster-title em {
+    display: block;
+    font-style: italic;
+    color: #4a2060;
+    font-size: 1.4rem;
+  }
+
+  .poster-date-badge {
+    margin-top: 0.5rem;
+    padding: 0.6rem 1.5rem;
+    border: 1px solid rgba(74,32,96,0.35);
+    color: rgba(42,26,62,0.85);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+  }
+
+  .poster-bottom-text {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 0.6rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: #2a1a3e;
+    opacity: 0.45;
+    z-index: 1;
+  }
+
+  .poster-photo-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    width: 54.45%;
+    z-index: 1;
+  }
+
+  .poster-photo-row {
+    display: flex;
+    gap: 6px;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .poster-photo-row--centered {
+    width: 66.8%;
+  }
+
+  .poster-photo-slot {
+    flex: 1;
+    aspect-ratio: 2/3;
+    background: #ffffff;
+    overflow: hidden;
+    min-width: 0;
+  }
+
+  .poster-photo-slot img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .show-info { padding-left: 1rem; }
+
+  .section-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--hero-accent);
+  }
+
+  .show-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 4vw, 3.2rem);
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+  }
+
+  .show-title em {
+    display: block;
+    font-style: italic;
+    color: var(--hero-accent);
+  }
+
+  .show-description {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-weight: 300;
+    line-height: 1.8;
+    color: var(--ink);
+    opacity: 0.65;
+    margin: 2rem 0;
+  }
+
+  .show-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 2.5rem 0;
+    padding: 1.5rem;
+    border-left: 3px solid var(--show-mint);
+    background: rgba(166,245,220,0.12);
+  }
+
+  .meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .meta-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--mid);
+  }
+
+  .meta-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--ink);
+    font-weight: 400;
+  }
+
+  .ticket-btn {
+    display: inline-block;
+    padding: 1.1rem 3.5rem;
+    background: var(--purple);
+    color: var(--white);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+    border: 1px solid rgba(83,14,96,0.2);
+    box-shadow: 0 8px 30px rgba(83,14,96,0.25);
+  }
+
+  .ticket-btn:hover {
+    background: var(--purple-mid);
+    transform: translateY(-2px);
+    box-shadow: 0 15px 40px rgba(83,14,96,0.4);
+  }
+
+  /* ── ABOUT ── */
+  #about {
+    padding: 8rem 4rem;
+    position: relative;
+    background: linear-gradient(180deg, var(--off-white) 0%, var(--purple-tint) 50%, var(--off-white) 100%);
+  }
+
+  .section-header {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 5rem;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+  }
+
+  .section-title em {
+    font-style: italic;
+    color: var(--hero-accent);
+  }
+
+  .section-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.9;
+    color: var(--ink);
+    opacity: 0.6;
+  }
+
+  /* Team grid */
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 2.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .member-card {
+    position: relative;
+    text-align: center;
+    group: true;
+  }
+
+  .member-photo {
+    position: relative;
+    aspect-ratio: 3/4;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+    background: var(--purple-tint);
+    border: 1px solid var(--border);
+  }
+
+  .member-photo::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(83,14,96,0.45) 0%, transparent 55%);
+    pointer-events: none;
+  }
+
+  /* Member photos */
+  .member-photo img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 15%;
+    display: block;
+    filter: grayscale(100%);
+    transition: filter 0.4s;
+  }
+  .member-card:hover .member-photo img {
+    filter: grayscale(50%);
+  }
+
+  .member-photo-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(83,14,96,0.7) 0%, rgba(83,14,96,0.04) 55%, transparent 100%);
+    z-index: 2;
+    transition: opacity 0.4s;
+  }
+
+  .member-card:hover .member-photo-overlay {
+    opacity: 0.6;
+  }
+
+  .member-photo-border {
+    position: absolute;
+    inset: 0;
+    border: 1px solid transparent;
+    transition: border-color 0.4s;
+    z-index: 3;
+  }
+
+  .member-card:hover .member-photo-border {
+    border-color: rgba(83,14,96,0.35);
+  }
+
+  .member-role-badge {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    z-index: 4;
+    padding: 0.25rem 0.7rem;
+    background: rgba(192,21,42,0.85);
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #fdeaea;
+    font-family: 'Cormorant Garamond', serif;
+    backdrop-filter: blur(4px);
+  }
+
+  .member-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.4rem;
+    transition: color 0.3s;
+  }
+
+  .member-card:hover .member-name { color: var(--purple); }
+
+  .member-skills {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.95rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--mid);
+    line-height: 1.6;
+    opacity: 1;
+  }
+
+  /* ── CONTACTS ── */
+  #contact {
+    padding: 8rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #contact::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 0%, rgba(83,14,96,0.04) 50%, transparent 100%);
+  }
+
+  .contact-inner {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin: 3rem 0;
+  }
+
+  .contact-block h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--red-detoned);
+    margin-bottom: 1rem;
+    border-bottom: 1px solid rgba(158,58,58,0.2);
+    padding-bottom: 0.75rem;
+  }
+
+  .contact-block p, .contact-block a {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    color: var(--ink);
+    opacity: 0.65;
+    line-height: 1.8;
+    text-decoration: none;
+    transition: opacity 0.3s;
+  }
+
+  .contact-block a:hover { opacity: 1; color: var(--purple); }
+
+  .contact-form {
+    margin-top: 4rem;
+    padding: 3rem;
+    border: 1px solid var(--border);
+    background: var(--purple-tint);
+  }
+
+  .contact-form h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: var(--ink);
+    margin-bottom: 2rem;
+    font-style: italic;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .form-group label {
+    font-size: 0.65rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--smoke);
+    font-family: 'Cormorant Garamond', serif;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    background: var(--white);
+    border: 1px solid var(--border);
+    color: var(--ink);
+    padding: 0.85rem 1rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s;
+    resize: none;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus {
+    border-color: var(--purple-light);
+  }
+
+  .form-group input::placeholder,
+  .form-group textarea::placeholder {
+    color: rgba(107,85,160,0.35);
+  }
+
+  .form-submit {
+    display: inline-block;
+    padding: 1rem 3rem;
+    background: transparent;
+    border: 1px solid rgba(220,180,230,0.6);
+    color: rgba(220,180,230,0.9);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .form-submit::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--purple);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+    z-index: 0;
+  }
+
+  .form-submit:hover { color: var(--white); }
+  .form-submit:hover::before { transform: scaleX(1); }
+  .form-submit span { position: relative; z-index: 1; }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 3rem 4rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--purple);
+    opacity: 0.7;
+  }
+
+  .footer-copy {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.8rem;
+    color: var(--mid);
+    opacity: 0.6;
+    letter-spacing: 0.15em;
+  }
+
+  .footer-social {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .footer-social a {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--mid);
+    opacity: 0.6;
+    text-decoration: none;
+    transition: opacity 0.3s, color 0.3s;
+  }
+
+  .footer-social a:hover { opacity: 1; color: var(--purple); }
+
+  /* ── SECTION FADE-IN ── */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.9s cubic-bezier(0.22,1,0.36,1), transform 0.9s cubic-bezier(0.22,1,0.36,1);
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* stagger delays */
+  .fade-in:nth-child(1) { transition-delay: 0s; }
+  .fade-in:nth-child(2) { transition-delay: 0.1s; }
+  .fade-in:nth-child(3) { transition-delay: 0.2s; }
+  .fade-in:nth-child(4) { transition-delay: 0.3s; }
+  .fade-in:nth-child(5) { transition-delay: 0.4s; }
+  .fade-in:nth-child(6) { transition-delay: 0.5s; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1.2rem 2rem; }
+    .nav-links { display: none; }
+    #show, #about, #contact { padding: 5rem 2rem; }
+    .show-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .form-row { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; }
+    .team-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 600px) {
+    .team-grid { grid-template-columns: 1fr; }
+    .contact-form { padding: 2rem 1.5rem; }
+    .hero-title { font-size: 3rem; }
+    .hero-title .line2 { font-size: 2.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <div class="nav-logo">
+    Velvet Curtain Collective
+    <span>Prague</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#show">Our Show</a></li>
+    <li><a href="#about">About Us</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg">
+    <div class="hero-blob hero-blob-1"></div>
+    <div class="hero-blob hero-blob-2"></div>
+    <div class="hero-blob hero-blob-3"></div>
+    <div class="hero-blob hero-blob-4"></div>
+    <div class="hero-blob hero-blob-5"></div>
+    <div class="hero-blob hero-blob-6"></div>
+  </div>
+  <div class="curtain-left"></div>
+  <div class="curtain-right"></div>
+  <div class="spotlight"></div>
+
+  <div class="hero-content">
+    <p class="hero-eyebrow">Prague Musical Theatre</p>
+    <h1 class="hero-title">
+      Velvet Curtain
+      <span class="line2">Collective</span>
+    </h1>
+    <p class="hero-subtitle">
+      Where women from around the world take the musical stage.
+    </p>
+    <a href="#show" class="hero-cta"><span>See our show</span></a>
+  </div>
+
+  <div class="scroll-indicator">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- SHOW PROMO -->
+<section id="show">
+  <div class="show-inner">
+    <div class="show-poster fade-in">
+      <div class="poster-frame">
+        <div class="poster-visual">
+          <div class="poster-photo-group">
+            <div class="poster-photo-row">
+              <div class="poster-photo-slot" data-index="1"><img src="https://github.com/Marimazzotti/vcc-assets/raw/main/Marina_dress.jpeg" alt=""></div>
+              <div class="poster-photo-slot" data-index="2"><img src="https://github.com/Marimazzotti/vcc-assets/raw/main/Amy_dress.png" alt=""></div>
+              <div class="poster-photo-slot" data-index="3"><img src="https://github.com/Marimazzotti/vcc-assets/raw/main/CeeCee_dress.jpg" alt=""></div>
+            </div>
+            <div class="poster-photo-row poster-photo-row--centered">
+              <div class="poster-photo-slot" data-index="4"><img src="https://github.com/Marimazzotti/vcc-assets/raw/main/Danielle_dress.jpg" alt=""></div>
+              <div class="poster-photo-slot" data-index="5"><img src="https://github.com/Marimazzotti/vcc-assets/raw/main/Gabby_dress.jpg" alt=""></div>
+            </div>
+          </div>
+          <div class="poster-title">
+            Cabaret of<br>
+            <em>Broken Dolls</em>
+          </div>
+          <div class="poster-date-badge">3 July 2026 · Prague</div>
+          <div class="poster-photo-group">
+            <div class="poster-photo-row poster-photo-row--centered">
+              <div class="poster-photo-slot" data-index="6"><img src="https://github.com/Marimazzotti/vcc-assets/raw/main/Laura_dress.jpg" alt=""></div>
+              <div class="poster-photo-slot" data-index="7"><img src="https://github.com/Marimazzotti/vcc-assets/raw/main/Lucila_dress.jpg" alt=""></div>
+            </div>
+            <div class="poster-photo-row">
+              <div class="poster-photo-slot" data-index="8"><img src="https://github.com/Marimazzotti/vcc-assets/raw/main/Stefanie_dress.jpg" alt=""></div>
+              <div class="poster-photo-slot" data-index="9"><img src="https://github.com/Marimazzotti/vcc-assets/raw/main/Teresa_dress.jpg" alt=""></div>
+              <div class="poster-photo-slot" data-index="10"><img src="https://github.com/Marimazzotti/vcc-assets/raw/main/Solomia.jpg" alt=""></div>
+            </div>
+          </div>
+        </div>
+        <div class="poster-bottom-text">Velvet Curtain Collective</div>
+      </div>
+    </div>
+
+    <div class="show-info fade-in">
+      <p class="section-label">— Coming Next</p>
+      <h2 class="show-title">
+        Cabaret of
+        <em>Broken Dolls</em>
+      </h2>
+      <p class="show-description">
+        Set in the dim glow of a Prague cabaret, ten women take the stage.
+        Polished dolls with hidden cracks, their stories unfolding through music, movement, and confession.
+        Part cabaret reverie, part emotional reckoning, where illusion slips, vulnerability surfaces, and the broken begin to transform.
+        Raw, playful, and unapologetically feminine, a celebration of rising, together.
+      </p>
+
+      <div class="show-meta">
+        <div class="meta-item">
+          <span class="meta-label">Date</span>
+          <span class="meta-value">Thursday, 3 July 2026</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Venue</span>
+          <span class="meta-value">Divadlo Na Zábradlí, Anenské nám. 5, Prague 1</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Doors open</span>
+          <span class="meta-value">19:00 · Showtime 20:00</span>
+        </div>
+      </div>
+
+      <a href="https://goout.net/en/" class="ticket-btn" target="_blank" rel="noopener noreferrer">Book Your Ticket</a>
+    </div>
+  </div>
+</section>
+
+<div class="ornamental-divider">✦ &nbsp; ✦ &nbsp; ✦</div>
+
+<!-- ABOUT US -->
+<section id="about">
+  <div class="section-header fade-in">
+    <p class="section-label">— The Company</p>
+    <h2 class="section-title">We Are the <em>Velvet Curtain Collective</em></h2>
+    <p class="section-text">
+      Velvet Curtain Collective was born in Prague, built by women who arrived from 
+      every corner of the world and found each other through music and theater. We are 
+      performers, storytellers, and collaborators who believe the stage is a place for 
+      truth — raw, beautiful, and alive. Together, we create musical theater that 
+      celebrates where we come from, who we are, and the extraordinary power of 
+      women's voices in harmony.
+    </p>
+  </div>
+
+  <div class="team-grid">
+    <div class="member-card fade-in">
+      <div class="member-photo">
+        <img src="https://github.com/Marimazzotti/vcc-assets/raw/main/Amy(Director).jpg" alt="Amy">
+        <div class="member-role-badge">Musical Director</div>
+        <div class="member-photo-overlay"></div>
+        <div class="member-photo-border"></div>
+      </div>
+      <h3 class="member-name">Amy</h3>
+      <p class="member-skills">Musical Director. Trained at DAMU, Prague. Weaves Czech folklore into contemporary dark musical forms.</p>
+    </div>
+
+    <div class="member-card fade-in">
+      <div class="member-photo">
+        <img src="https://github.com/Marimazzotti/vcc-assets/raw/main/Lucila(Music%20Coordinator).jpg" alt="Lucila">
+        <div class="member-role-badge">Artistic Director</div>
+        <div class="member-photo-overlay"></div>
+        <div class="member-photo-border"></div>
+      </div>
+      <h3 class="member-name">Lucila</h3>
+      <p class="member-skills">Artistic Director. Writes scores that sit somewhere between Weimar cabaret and Dvořák.</p>
+    </div>
+
+    <div class="member-card fade-in">
+      <div class="member-photo">
+        <img src="https://github.com/Marimazzotti/vcc-assets/raw/main/Danielle.jpg" alt="Danielle">
+        <div class="member-role-badge">Performer</div>
+        <div class="member-photo-overlay"></div>
+        <div class="member-photo-border"></div>
+      </div>
+      <h3 class="member-name">Danielle</h3>
+      <p class="member-skills">Alto. Classically trained, recklessly experimental. Her voice breaks things on purpose.</p>
+    </div>
+
+    <div class="member-card fade-in">
+      <div class="member-photo">
+        <img src="https://github.com/Marimazzotti/vcc-assets/raw/main/Laura.jpg" alt="Laura">
+        <div class="member-role-badge">Performer</div>
+        <div class="member-photo-overlay"></div>
+        <div class="member-photo-border"></div>
+      </div>
+      <h3 class="member-name">Laura</h3>
+      <p class="member-skills">Mezzo-soprano. Social media & Marketing. Commands the stage with fierce precision and an unnerving stillness before the storm.</p>
+    </div>
+
+    <div class="member-card fade-in">
+      <div class="member-photo">
+        <img src="https://github.com/Marimazzotti/vcc-assets/raw/main/Marina.jpg" alt="Marina">
+        <div class="member-role-badge">Performer</div>
+        <div class="member-photo-overlay"></div>
+        <div class="member-photo-border"></div>
+      </div>
+      <h3 class="member-name">Marina</h3>
+      <p class="member-skills">Public relations & designer. Alto. All round abilities. Music theory, singing, dancing. </p>
+    </div>
+
+    <div class="member-card fade-in">
+      <div class="member-photo">
+        <img src="https://github.com/Marimazzotti/vcc-assets/raw/main/Gabby.jpg" alt="Gabby">
+        <div class="member-role-badge">Performer</div>
+        <div class="member-photo-overlay"></div>
+        <div class="member-photo-border"></div>
+      </div>
+      <h3 class="member-name">Gabby</h3>
+      <p class="member-skills">Soprano. Blends contemporary dance with puppet-theatre mechanics — bodies as instruments.</p>
+    </div>
+
+    <div class="member-card fade-in">
+      <div class="member-photo">
+        <img src="https://github.com/Marimazzotti/vcc-assets/raw/main/Solomia.jpg" alt="Solomia">
+        <div class="member-role-badge">Performer</div>
+        <div class="member-photo-overlay"></div>
+        <div class="member-photo-border"></div>
+      </div>
+      <h3 class="member-name">Solomia</h3>
+      <p class="member-skills">Professional singer. Mezzo soprano.</p>
+    </div>
+
+    <div class="member-card fade-in">
+      <div class="member-photo">
+        <img src="https://github.com/Marimazzotti/vcc-assets/raw/main/Teresa.jpg" alt="Teresa">
+        <div class="member-role-badge">Performer</div>
+        <div class="member-photo-overlay"></div>
+        <div class="member-photo-border"></div>
+      </div>
+      <h3 class="member-name">Teresa</h3>
+      <p class="member-skills">Actress. Singer. Mezzo soprano.</p>
+    </div>
+
+    <div class="member-card fade-in">
+      <div class="member-photo">
+        <img src="https://github.com/Marimazzotti/vcc-assets/raw/main/CeeCee.jpg" alt="CeeCee">
+        <div class="member-role-badge">Performer</div>
+        <div class="member-photo-overlay"></div>
+        <div class="member-photo-border"></div>
+      </div>
+      <h3 class="member-name">CeeCee</h3>
+      <p class="member-skills">Actress & vocalist with an electric stage presence. Specialises in physical comedy and devastating tragedy — often at once.</p>
+    </div>
+
+    <div class="member-card fade-in">
+      <div class="member-photo">
+        <img src="https://github.com/Marimazzotti/vcc-assets/raw/main/Amy(Director).jpg" alt="Stefanie">
+        <div class="member-role-badge">Performer</div>
+        <div class="member-photo-overlay"></div>
+        <div class="member-photo-border"></div>
+      </div>
+      <h3 class="member-name">Stefanie</h3>
+      <p class="member-skills">Singer. Alto.</p>
+    </div>
+
+  </div>
+</section>
+
+<div class="ornamental-divider">✦ &nbsp; ✦ &nbsp; ✦</div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="section-header fade-in">
+      <p class="section-label">— Get in Touch</p>
+      <h2 class="section-title">Come <em>Find Us</em></h2>
+      <p class="section-text">
+        For collaborations, press enquiries, tickets, or simply to say you were here — 
+        the curtain is always open.
+      </p>
+    </div>
+
+    <div class="contact-grid fade-in">
+      <div class="contact-block">
+        <h3>Write to us</h3>
+        <p>
+          <a href="/cdn-cgi/l/email-protection#dcb4b9b0b0b39caab9b0aab9a8bfa9aea8bdb5b2f2bfa6"><span class="__cf_email__" data-cfemail="234b464f4f4c6355464f55465740565157424a4d0d4059">[email&#160;protected]</span></a><br>
+          <a href="/cdn-cgi/l/email-protection#2151534452526157444d5744554254535540484f0f425b"><span class="__cf_email__" data-cfemail="98e8eafdebebd8eefdf4eefdecfbedeaecf9f1f6b6fbe2">[email&#160;protected]</span></a>
+        </p>
+      </div>
+      <div class="contact-block">
+        <h3>Find us in Prague</h3>
+        <p>
+          Based in Prague 2, Vinohrady<br>
+          Rehearsals by arrangement
+        </p>
+      </div>
+      <div class="contact-block">
+        <h3>Follow the stage</h3>
+        <p>
+          <a href="#">@velvetcurtaincollective</a><br>
+          Instagram · Facebook
+        </p>
+      </div>
+      <div class="contact-block">
+        <h3>Show venue</h3>
+        <p>
+          Divadlo Na Zábradlí<br>
+          Anenské nám. 5, Prague 1
+        </p>
+      </div>
+    </div>
+
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">VCC</div>
+  <p class="footer-copy">© 2026 Velvet Curtain Collective, Prague. All rights reserved.</p>
+  <div class="footer-social">
+    <a href="#">Instagram</a>
+    <a href="#">Facebook</a>
+    <a href="#">Press Kit</a>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll effect
+  const nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Intersection observer for fade-in
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
