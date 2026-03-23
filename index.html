@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Velvet Curtain Collective — Prague Musical Theatre</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Allura&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <style>
   :root {
     /* ── Brand (global) ── */
@@ -73,13 +73,15 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #FFFFFF;
+    background: transparent;
     transition: background 0.4s;
+    border-bottom: 1px solid rgba(255,255,255,0.3);
   }
 
   nav.scrolled {
-    background: #FFFFFF;
-    border-bottom: 1px solid rgba(83,14,96,0.1);
+    background: rgba(30, 3, 41, 0.82);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
   }
 
   .nav-logo {
@@ -87,19 +89,13 @@
     font-size: 1.1rem;
     font-weight: 700;
     letter-spacing: 0.15em;
-    color: var(--purple);
-    text-transform: uppercase;
+    color: #ffffff;
   }
 
-  .nav-logo span {
-    display: block;
-    font-size: 0.65rem;
-    font-weight: 400;
-    letter-spacing: 0.4em;
-    color: var(--mid);
-    font-family: 'Cormorant Garamond', serif;
-    margin-top: 2px;
+  .initial {
+    color: #c97de0;
   }
+
 
   .nav-links {
     display: flex;
@@ -110,11 +106,12 @@
   .nav-links a {
     font-family: 'Cormorant Garamond', serif;
     font-size: 0.85rem;
+    font-weight: 600;
     letter-spacing: 0.25em;
     text-transform: uppercase;
-    color: var(--ink);
+    color: #ffffff;
     text-decoration: none;
-    opacity: 0.6;
+    opacity: 0.75;
     transition: opacity 0.3s, color 0.3s;
     position: relative;
   }
@@ -126,11 +123,11 @@
     left: 0;
     width: 0;
     height: 1px;
-    background: var(--purple);
+    background: #ffffff;
     transition: width 0.3s;
   }
 
-  .nav-links a:hover { opacity: 1; color: var(--purple); }
+  .nav-links a:hover { opacity: 1; color: #ffffff; }
   .nav-links a:hover::after { width: 100%; }
 
   /* ── HERO ── */
@@ -200,16 +197,16 @@
 
   @keyframes blobDrift6 {
     0%   { transform: translate(0, 0) rotate(0deg) scale(1); }
-    35%  { transform: translate(-5%, 7%) rotate(-14deg) scale(1.08); }
-    70%  { transform: translate(7%, -3%) rotate(9deg) scale(0.94); }
-    100% { transform: translate(-3%, -8%) rotate(-20deg) scale(1.05); }
+    35%  { transform: translate(-18%, 20%) rotate(-18deg) scale(1.12); }
+    70%  { transform: translate(22%, -12%) rotate(12deg) scale(0.9); }
+    100% { transform: translate(-10%, -22%) rotate(-25deg) scale(1.1); }
   }
 
   @keyframes blobDrift5 {
     0%   { transform: translate(0, 0) rotate(0deg) scale(1); }
-    40%  { transform: translate(6%, -5%) rotate(12deg) scale(1.07); }
-    70%  { transform: translate(-4%, 4%) rotate(-8deg) scale(0.96); }
-    100% { transform: translate(8%, 6%) rotate(18deg) scale(1.1); }
+    40%  { transform: translate(20%, -18%) rotate(15deg) scale(1.12); }
+    70%  { transform: translate(-15%, 14%) rotate(-12deg) scale(0.92); }
+    100% { transform: translate(25%, 20%) rotate(22deg) scale(1.15); }
   }
 
   @keyframes blobDrift1 {
@@ -301,8 +298,30 @@
     letter-spacing: 0.55em;
     text-transform: uppercase;
     color: rgba(220,180,230,0.75);
-    margin-bottom: 2rem;
+    margin-bottom: 1.25rem;
     opacity: 1;
+  }
+
+  .hero-stars {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-star-icon {
+    width: 12px;
+    height: 12px;
+    color: rgba(201,125,224,0.7);
+    flex-shrink: 0;
+  }
+
+  .hero-star-line {
+    display: block;
+    width: 60px;
+    height: 1px;
+    background: rgba(201,125,224,0.35);
   }
 
   .hero-title {
@@ -317,19 +336,19 @@
 
   .hero-title .line2 {
     display: block;
-    font-style: italic;
-    color: #c97de0;
-    font-size: clamp(3rem, 7vw, 7rem);
+    font-style: normal;
+    color: #ffffff;
   }
 
   .hero-subtitle {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(1rem, 2vw, 1.35rem);
-    font-weight: 300;
+    font-size: clamp(1.125rem, 2vw, 1.475rem);
+    font-weight: 400;
     font-style: italic;
     color: rgba(220,190,228,0.75);
     margin: 2rem auto 3.5rem;
-    max-width: 520px;
+    max-width: none;
+    white-space: nowrap;
     letter-spacing: 0.05em;
     line-height: 1.7;
     opacity: 0.85;
@@ -477,7 +496,50 @@
     inset: 8px;
     border: 1px solid rgba(74,32,96,0.12);
     pointer-events: none;
+    z-index: 3;
+  }
+
+  .poster-carousel {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    overflow: hidden;
+  }
+
+  .poster-slide {
+    position: absolute;
+    inset: 0;
+    transform: translateX(100%);
+    transition: transform 0.85s ease;
+  }
+
+  .poster-slide.active {
+    transform: translateX(0);
+  }
+
+  .poster-slide.exiting {
+    transform: translateX(-100%);
+  }
+
+  .poster-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .poster-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     z-index: 2;
+    gap: 0.75rem;
+    text-align: center;
+    padding: 1.5rem;
+    pointer-events: none;
   }
 
   .poster-visual {
@@ -513,8 +575,8 @@
   .poster-date-badge {
     margin-top: 0.5rem;
     padding: 0.6rem 1.5rem;
-    border: 1px solid rgba(74,32,96,0.35);
-    color: rgba(42,26,62,0.85);
+    border: 1px solid rgba(255,255,255,0.5);
+    color: rgba(255,255,255,0.9);
     font-family: 'Cormorant Garamond', serif;
     font-size: 0.75rem;
     letter-spacing: 0.3em;
@@ -530,8 +592,8 @@
     font-size: 0.6rem;
     letter-spacing: 0.4em;
     text-transform: uppercase;
-    color: #2a1a3e;
-    opacity: 0.45;
+    color: rgba(255,255,255,0.7);
+    opacity: 1;
     z-index: 1;
   }
 
@@ -598,8 +660,8 @@
 
   .show-description {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1.15rem;
-    font-weight: 300;
+    font-size: 1.275rem;
+    font-weight: 400;
     line-height: 1.8;
     color: var(--ink);
     opacity: 0.65;
@@ -630,7 +692,7 @@
   }
 
   .meta-value {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 1.1rem;
     color: var(--ink);
     font-weight: 400;
@@ -638,6 +700,7 @@
 
   .ticket-btn {
     display: inline-block;
+    width: fit-content;
     padding: 1.1rem 3.5rem;
     background: var(--purple);
     color: var(--white);
@@ -686,12 +749,11 @@
 
   .section-text {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1.15rem;
-    font-weight: 300;
-    font-style: italic;
-    line-height: 1.9;
+    font-size: 1.275rem;
+    font-weight: 400;
+    line-height: 1.8;
     color: var(--ink);
-    opacity: 0.6;
+    opacity: 0.65;
   }
 
   /* Team grid */
@@ -782,9 +844,8 @@
   }
 
   .member-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.3rem;
-    font-weight: 700;
+    font-family: 'Allura', cursive;
+    font-size: 1.8rem;
     color: var(--ink);
     margin-bottom: 0.4rem;
     transition: color 0.3s;
@@ -794,9 +855,8 @@
 
   .member-skills {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 0.95rem;
-    font-weight: 300;
-    font-style: italic;
+    font-size: 1.125rem;
+    font-weight: 400;
     color: var(--mid);
     line-height: 1.6;
     opacity: 1;
@@ -833,7 +893,6 @@
   .contact-block h3 {
     font-family: 'Playfair Display', serif;
     font-size: 1.1rem;
-    font-style: italic;
     color: var(--red-detoned);
     margin-bottom: 1rem;
     border-bottom: 1px solid rgba(158,58,58,0.2);
@@ -842,7 +901,7 @@
 
   .contact-block p, .contact-block a {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1rem;
+    font-size: 1.125rem;
     color: var(--ink);
     opacity: 0.65;
     line-height: 1.8;
@@ -851,6 +910,26 @@
   }
 
   .contact-block a:hover { opacity: 1; color: var(--purple); }
+
+  .social-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .social-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.125rem;
+    color: var(--ink);
+    opacity: 0.65;
+    text-decoration: none;
+    transition: opacity 0.3s, color 0.3s;
+  }
+
+  .social-link:hover { opacity: 1; color: var(--purple); }
 
   .contact-form {
     margin-top: 4rem;
@@ -1021,7 +1100,6 @@
     .team-grid { grid-template-columns: 1fr; }
     .contact-form { padding: 2rem 1.5rem; }
     .hero-title { font-size: 3rem; }
-    .hero-title .line2 { font-size: 2.5rem; }
   }
 </style>
 </head>
@@ -1030,8 +1108,7 @@
 <!-- NAV -->
 <nav id="main-nav">
   <div class="nav-logo">
-    Velvet Curtain Collective
-    <span>Prague</span>
+    <span class="initial">V</span>elvet <span class="initial">C</span>urtain <span class="initial">C</span>ollective
   </div>
   <ul class="nav-links">
     <li><a href="#show">Our Show</a></li>
@@ -1056,9 +1133,18 @@
 
   <div class="hero-content">
     <p class="hero-eyebrow">Prague Musical Theatre</p>
+    <div class="hero-stars">
+      <span class="hero-star-line"></span>
+      <svg class="hero-star-icon" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 0 L11.5 8.5 L20 10 L11.5 11.5 L10 20 L8.5 11.5 L0 10 L8.5 8.5 Z" fill="currentColor"/></svg>
+      <span class="hero-star-line"></span>
+      <svg class="hero-star-icon" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 0 L11.5 8.5 L20 10 L11.5 11.5 L10 20 L8.5 11.5 L0 10 L8.5 8.5 Z" fill="currentColor"/></svg>
+      <span class="hero-star-line"></span>
+      <svg class="hero-star-icon" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 0 L11.5 8.5 L20 10 L11.5 11.5 L10 20 L8.5 11.5 L0 10 L8.5 8.5 Z" fill="currentColor"/></svg>
+      <span class="hero-star-line"></span>
+    </div>
     <h1 class="hero-title">
-      Velvet Curtain
-      <span class="line2">Collective</span>
+      <span class="initial">V</span>elvet <span class="initial">C</span>urtain
+      <span class="line2"><span class="initial">C</span>ollective</span>
     </h1>
     <p class="hero-subtitle">
       Where women from around the world take the musical stage.
@@ -1077,34 +1163,25 @@
   <div class="show-inner">
     <div class="show-poster fade-in">
       <div class="poster-frame">
-        <div class="poster-visual">
-          <div class="poster-photo-group">
-            <div class="poster-photo-row">
-              <div class="poster-photo-slot" data-index="1"><img src="https://github.com/Marimazzotti/vcc-assets/raw/main/Marina_dress.jpeg" alt=""></div>
-              <div class="poster-photo-slot" data-index="2"><img src="https://github.com/Marimazzotti/vcc-assets/raw/main/Amy_dress.png" alt=""></div>
-              <div class="poster-photo-slot" data-index="3"><img src="https://github.com/Marimazzotti/vcc-assets/raw/main/CeeCee_dress.jpg" alt=""></div>
-            </div>
-            <div class="poster-photo-row poster-photo-row--centered">
-              <div class="poster-photo-slot" data-index="4"><img src="https://github.com/Marimazzotti/vcc-assets/raw/main/Danielle_dress.jpg" alt=""></div>
-              <div class="poster-photo-slot" data-index="5"><img src="https://github.com/Marimazzotti/vcc-assets/raw/main/Gabby_dress.jpg" alt=""></div>
-            </div>
-          </div>
+        <div class="poster-carousel">
+          <div class="poster-slide active"></div>
+          <div class="poster-slide"><img src="https://github.com/Marimazzotti/vcc-assets/raw/main/Amy_dress.png" alt="Amy"></div>
+          <div class="poster-slide"><img src="https://github.com/Marimazzotti/vcc-assets/raw/main/Marina_dress.jpeg" alt="Marina"></div>
+          <div class="poster-slide"><img src="https://github.com/Marimazzotti/vcc-assets/raw/main/CeeCee_dress.jpg" alt="CeeCee"></div>
+          <div class="poster-slide"><img src="https://github.com/Marimazzotti/vcc-assets/raw/main/Danielle_dress.jpg" alt="Danielle"></div>
+          <div class="poster-slide"><img src="https://github.com/Marimazzotti/vcc-assets/raw/main/Gabby_dress.jpg" alt="Gabby"></div>
+          <div class="poster-slide"><img src="https://github.com/Marimazzotti/vcc-assets/raw/main/Laura_dress.jpg" alt="Laura"></div>
+          <div class="poster-slide"><img src="https://github.com/Marimazzotti/vcc-assets/raw/main/Lucila_dress.jpg" alt="Lucila"></div>
+          <div class="poster-slide"><img src="https://github.com/Marimazzotti/vcc-assets/raw/main/Stefanie_dress.jpg" alt="Stefanie"></div>
+          <div class="poster-slide"><img src="https://github.com/Marimazzotti/vcc-assets/raw/main/Teresa_dress.jpg" alt="Teresa"></div>
+          <div class="poster-slide"><img src="https://github.com/Marimazzotti/vcc-assets/raw/main/Solomia_dress.jpeg" alt="Solomia"></div>
+        </div>
+        <div class="poster-overlay">
           <div class="poster-title">
             Cabaret of<br>
             <em>Broken Dolls</em>
           </div>
           <div class="poster-date-badge">3 July 2026 · Prague</div>
-          <div class="poster-photo-group">
-            <div class="poster-photo-row poster-photo-row--centered">
-              <div class="poster-photo-slot" data-index="6"><img src="https://github.com/Marimazzotti/vcc-assets/raw/main/Laura_dress.jpg" alt=""></div>
-              <div class="poster-photo-slot" data-index="7"><img src="https://github.com/Marimazzotti/vcc-assets/raw/main/Lucila_dress.jpg" alt=""></div>
-            </div>
-            <div class="poster-photo-row">
-              <div class="poster-photo-slot" data-index="8"><img src="https://github.com/Marimazzotti/vcc-assets/raw/main/Stefanie_dress.jpg" alt=""></div>
-              <div class="poster-photo-slot" data-index="9"><img src="https://github.com/Marimazzotti/vcc-assets/raw/main/Teresa_dress.jpg" alt=""></div>
-              <div class="poster-photo-slot" data-index="10"><img src="https://github.com/Marimazzotti/vcc-assets/raw/main/Solomia_dress.jpeg" alt=""></div>
-            </div>
-          </div>
         </div>
         <div class="poster-bottom-text">Velvet Curtain Collective</div>
       </div>
@@ -1130,7 +1207,7 @@
         </div>
         <div class="meta-item">
           <span class="meta-label">Venue</span>
-          <span class="meta-value">Divadlo Na Zábradlí, Anenské nám. 5, Prague 1</span>
+          <span class="meta-value">Galerie LAPIDARIUM, Rámová 735/6, 110 00 Prague 1, Czechia</span>
         </div>
         <div class="meta-item">
           <span class="meta-label">Doors open</span>
@@ -1292,29 +1369,33 @@
       <div class="contact-block">
         <h3>Write to us</h3>
         <p>
-          <a href="/cdn-cgi/l/email-protection#dcb4b9b0b0b39caab9b0aab9a8bfa9aea8bdb5b2f2bfa6"><span class="__cf_email__" data-cfemail="234b464f4f4c6355464f55465740565157424a4d0d4059">[email&#160;protected]</span></a><br>
-          <a href="/cdn-cgi/l/email-protection#2151534452526157444d5744554254535540484f0f425b"><span class="__cf_email__" data-cfemail="98e8eafdebebd8eefdf4eefdecfbedeaecf9f1f6b6fbe2">[email&#160;protected]</span></a>
+          <a href="mailto:info@velvetcurtaincollective.com">info@velvetcurtaincollective.com</a>
         </p>
       </div>
       <div class="contact-block">
-        <h3>Find us in Prague</h3>
+        <h3>Find us</h3>
         <p>
-          Based in Prague 2, Vinohrady<br>
-          Rehearsals by arrangement
+          Based in Prague 1, Old Town
         </p>
       </div>
       <div class="contact-block">
-        <h3>Follow the stage</h3>
-        <p>
-          <a href="#">@velvetcurtaincollective</a><br>
-          Instagram · Facebook
-        </p>
+        <h3>Follow us</h3>
+        <div class="social-links">
+          <a href="https://www.instagram.com/velvetcurtaincollective" target="_blank" rel="noopener noreferrer" class="social-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+            @velvetcurtaincollective
+          </a>
+          <a href="https://www.tiktok.com/@velvetcurtaincollective" target="_blank" rel="noopener noreferrer" class="social-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V9.5a8.16 8.16 0 004.79 1.53V7.56a4.85 4.85 0 01-3.02-.87z"/></svg>
+            @velvetcurtaincollective
+          </a>
+        </div>
       </div>
       <div class="contact-block">
         <h3>Show venue</h3>
         <p>
-          Divadlo Na Zábradlí<br>
-          Anenské nám. 5, Prague 1
+          Galerie LAPIDARIUM<br>
+          Rámová 735/6, 110 00 Prague 1, Czechia
         </p>
       </div>
     </div>
@@ -1328,9 +1409,8 @@
   <div class="footer-logo">VCC</div>
   <p class="footer-copy">© 2026 Velvet Curtain Collective, Prague. All rights reserved.</p>
   <div class="footer-social">
-    <a href="#">Instagram</a>
-    <a href="#">Facebook</a>
-    <a href="#">Press Kit</a>
+    <a href="https://www.instagram.com/velvetcurtaincollective" target="_blank" rel="noopener noreferrer">Instagram</a>
+    <a href="https://www.tiktok.com/@velvetcurtaincollective" target="_blank" rel="noopener noreferrer">TikTok</a>
   </div>
 </footer>
 
@@ -1352,6 +1432,26 @@
   }, { threshold: 0.12 });
 
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Poster carousel
+  const posterSlides = document.querySelectorAll('.poster-slide');
+  let currentSlide = 0;
+
+  setInterval(() => {
+    const prev = currentSlide;
+    currentSlide = (currentSlide + 1) % posterSlides.length;
+
+    posterSlides[prev].classList.remove('active');
+    posterSlides[prev].classList.add('exiting');
+    posterSlides[currentSlide].classList.add('active');
+
+    setTimeout(() => {
+      posterSlides[prev].style.transition = 'none';
+      posterSlides[prev].classList.remove('exiting');
+      posterSlides[prev].offsetHeight; // force reflow
+      posterSlides[prev].style.transition = '';
+    }, 850);
+  }, 2000);
 </script>
 </body>
 </html>
