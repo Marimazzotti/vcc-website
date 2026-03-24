@@ -73,27 +73,38 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: transparent;
+    background: #ffffff;
     transition: background 0.4s;
-    border-bottom: 1px solid rgba(255,255,255,0.3);
+    border-bottom: 1px solid rgba(0,0,0,0.1);
   }
 
   nav.scrolled {
-    background: rgba(30, 3, 41, 0.82);
+    background: #ffffff;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
   }
 
   .nav-logo {
     font-family: 'Playfair Display', serif;
-    font-size: 1.1rem;
+    font-size: 1.35rem;
     font-weight: 700;
     letter-spacing: 0.15em;
-    color: #ffffff;
+    color: #000000;
   }
 
   .initial {
-    color: #c97de0;
+    color: #ffffff;
+  }
+
+  .nav-logo {
+    background: linear-gradient(to right, #530e60, #7a1590, #c0152a);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .nav-logo .initial {
+    color: #7a1590;
   }
 
 
@@ -109,7 +120,7 @@
     font-weight: 600;
     letter-spacing: 0.25em;
     text-transform: uppercase;
-    color: #ffffff;
+    color: #000000;
     text-decoration: none;
     opacity: 0.75;
     transition: opacity 0.3s, color 0.3s;
@@ -123,11 +134,11 @@
     left: 0;
     width: 0;
     height: 1px;
-    background: #ffffff;
+    background: #000000;
     transition: width 0.3s;
   }
 
-  .nav-links a:hover { opacity: 1; color: #ffffff; }
+  .nav-links a:hover { opacity: 1; color: #000000; }
   .nav-links a:hover::after { width: 100%; }
 
   /* ── HERO ── */
@@ -323,6 +334,9 @@
     height: 1px;
     background: rgba(201,125,224,0.35);
   }
+
+  .hero-stars--purple .hero-star-icon { color: var(--purple); }
+  .hero-stars--purple .hero-star-line { background: rgba(83,14,96,0.4); }
 
   .hero-title {
     font-family: 'Playfair Display', serif;
@@ -701,7 +715,7 @@
   .ticket-btn {
     display: inline-block;
     width: fit-content;
-    padding: 1.1rem 3.5rem;
+    padding: 1.1rem 2.5rem;
     background: var(--purple);
     color: var(--white);
     font-family: 'Cormorant Garamond', serif;
@@ -843,6 +857,7 @@
     backdrop-filter: blur(4px);
   }
 
+
   .member-name {
     font-family: 'Allura', cursive;
     font-size: 1.8rem;
@@ -860,6 +875,7 @@
     color: var(--mid);
     line-height: 1.6;
     opacity: 1;
+    text-align: justify;
   }
 
   /* ── CONTACTS ── */
@@ -885,7 +901,7 @@
 
   .contact-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 4rem;
     margin: 3rem 0;
   }
@@ -893,9 +909,9 @@
   .contact-block h3 {
     font-family: 'Playfair Display', serif;
     font-size: 1.1rem;
-    color: var(--red-detoned);
+    color: #c0152ad9;
     margin-bottom: 1rem;
-    border-bottom: 1px solid rgba(158,58,58,0.2);
+    border-bottom: 1px solid #c0152ad9;
     padding-bottom: 0.75rem;
   }
 
@@ -913,8 +929,8 @@
 
   .social-links {
     display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
+    flex-direction: row;
+    gap: 1.5rem;
   }
 
   .social-link {
@@ -1025,9 +1041,7 @@
   footer {
     padding: 3rem 4rem;
     border-top: 1px solid var(--border);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    text-align: center;
   }
 
   .footer-logo {
@@ -1215,7 +1229,7 @@
         </div>
       </div>
 
-      <a href="https://goout.net/en/" class="ticket-btn" target="_blank" rel="noopener noreferrer">Book Your Ticket</a>
+      <a href="https://goout.net/en/" class="ticket-btn" target="_blank" rel="noopener noreferrer">Book Tickets</a>
     </div>
   </div>
 </section>
@@ -1229,11 +1243,10 @@
     <h2 class="section-title">We Are the <em>Velvet Curtain Collective</em></h2>
     <p class="section-text">
       Velvet Curtain Collective was born in Prague, built by women who arrived from 
-      every corner of the world and found each other through music and theater. We are 
-      performers, storytellers, and collaborators who believe the stage is a place for 
-      truth — raw, beautiful, and alive. Together, we create musical theater that 
-      celebrates where we come from, who we are, and the extraordinary power of 
-      women's voices in harmony.
+      every corner of the world and found each other through a love for music and theater. <br>
+      We are singers, musicians, dancers, performers, creators, storytellers, and collaborators who believe the stage is a place for 
+      creative freedom. <br>
+      Together, we do musical theater that celebrates who we are, our skills, and where we come from.
     </p>
   </div>
 
@@ -1246,7 +1259,7 @@
         <div class="member-photo-border"></div>
       </div>
       <h3 class="member-name">Amy</h3>
-      <p class="member-skills">Musical Director. Trained at DAMU, Prague. Weaves Czech folklore into contemporary dark musical forms.</p>
+      <p class="member-skills">Michigan State music graduate. Has performed globally — including twice at the White House — and directed over 20 professional musical theatre productions in the US. Co-founder of VCC and the International Women of Prague Choir. Arranged the full show repertoire and wrote three original songs for the Broken Dolls show.</p>
     </div>
 
     <div class="member-card fade-in">
@@ -1257,7 +1270,7 @@
         <div class="member-photo-border"></div>
       </div>
       <h3 class="member-name">Lucila</h3>
-      <p class="member-skills">Artistic Director. Writes scores that sit somewhere between Weimar cabaret and Dvořák.</p>
+      <p class="member-skills">— Description coming soon.</p>
     </div>
 
     <div class="member-card fade-in">
@@ -1268,7 +1281,7 @@
         <div class="member-photo-border"></div>
       </div>
       <h3 class="member-name">Danielle</h3>
-      <p class="member-skills">Alto. Classically trained, recklessly experimental. Her voice breaks things on purpose.</p>
+      <p class="member-skills">Powerful voice and wide range, rooted in regional, state, and all-state choirs and school musicals. Behind the scenes, she keeps the Collective running — managing schedules and logistics, to make our dreams become reality. Motivated, organised, and relentlessly get-things-done.</p>
     </div>
 
     <div class="member-card fade-in">
@@ -1279,7 +1292,7 @@
         <div class="member-photo-border"></div>
       </div>
       <h3 class="member-name">Laura</h3>
-      <p class="member-skills">Mezzo-soprano. Social media & Marketing. Commands the stage with fierce precision and an unnerving stillness before the storm.</p>
+      <p class="member-skills">Natural singer and interpreter with vocal training and a developing stage presence. Experience in commercial acting, modelling, and content creation, with a focus on creating authentic and engaging work. Also involved in managing the Collective’s social media presence.</p>
     </div>
 
     <div class="member-card fade-in">
@@ -1290,7 +1303,7 @@
         <div class="member-photo-border"></div>
       </div>
       <h3 class="member-name">Marina</h3>
-      <p class="member-skills">Public relations & designer. Alto. All round abilities. Music theory, singing, dancing. </p>
+      <p class="member-skills">Versatile singer, strongly grounded in music theory. Multi-instrument player, and trained hip hop/modern dancer. Has arranged songs for vocal ensembles and loves singing in harmony. Supports the Collective with PR and web design, choreographed one song for the Broken Dolls show.</p>
     </div>
 
     <div class="member-card fade-in">
@@ -1301,7 +1314,7 @@
         <div class="member-photo-border"></div>
       </div>
       <h3 class="member-name">Gabby</h3>
-      <p class="member-skills">Soprano. Blends contemporary dance with puppet-theatre mechanics — bodies as instruments.</p>
+      <p class="member-skills">Holds a degree in Music with a specialism in Bel Canto, with opera credits including Le Nozze di Figaro and Pagliacci. Moves fluidly between opera and pop, blending both worlds with ease. Contributed to the makeup design concept for Broken Dolls and coached the team on makeup application techniques.</p>
     </div>
 
     <div class="member-card fade-in">
@@ -1312,7 +1325,7 @@
         <div class="member-photo-border"></div>
       </div>
       <h3 class="member-name">Solomia</h3>
-      <p class="member-skills">Professional singer. Mezzo soprano.</p>
+      <p class="member-skills">— Description coming soon.</p>
     </div>
 
     <div class="member-card fade-in">
@@ -1323,7 +1336,7 @@
         <div class="member-photo-border"></div>
       </div>
       <h3 class="member-name">Teresa</h3>
-      <p class="member-skills">Actress. Singer. Mezzo soprano.</p>
+      <p class="member-skills">— Description coming soon.</p>
     </div>
 
     <div class="member-card fade-in">
@@ -1334,7 +1347,7 @@
         <div class="member-photo-border"></div>
       </div>
       <h3 class="member-name">CeeCee</h3>
-      <p class="member-skills">Actress & vocalist with an electric stage presence. Specialises in physical comedy and devastating tragedy — often at once.</p>
+      <p class="member-skills">— Description coming soon.</p>
     </div>
 
     <div class="member-card fade-in">
@@ -1345,10 +1358,11 @@
         <div class="member-photo-border"></div>
       </div>
       <h3 class="member-name">Stefanie</h3>
-      <p class="member-skills">Singer. Alto.</p>
+      <p class="member-skills">— Description coming soon.</p>
     </div>
 
   </div>
+
 </section>
 
 <div class="ornamental-divider">✦ &nbsp; ✦ &nbsp; ✦</div>
@@ -1383,35 +1397,32 @@
         <div class="social-links">
           <a href="https://www.instagram.com/velvetcurtaincollective" target="_blank" rel="noopener noreferrer" class="social-link">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
-            @velvetcurtaincollective
+            Instagram
           </a>
           <a href="https://www.tiktok.com/@velvetcurtaincollective" target="_blank" rel="noopener noreferrer" class="social-link">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V9.5a8.16 8.16 0 004.79 1.53V7.56a4.85 4.85 0 01-3.02-.87z"/></svg>
-            @velvetcurtaincollective
+            TikTok
           </a>
         </div>
-      </div>
-      <div class="contact-block">
-        <h3>Show venue</h3>
-        <p>
-          Galerie LAPIDARIUM<br>
-          Rámová 735/6, 110 00 Prague 1, Czechia
-        </p>
       </div>
     </div>
 
 
+    <div class="hero-stars hero-stars--purple" style="margin-top:6rem;">
+      <span class="hero-star-line"></span>
+      <svg class="hero-star-icon" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 0 L11.5 8.5 L20 10 L11.5 11.5 L10 20 L8.5 11.5 L0 10 L8.5 8.5 Z" fill="currentColor"/></svg>
+      <span class="hero-star-line"></span>
+      <svg class="hero-star-icon" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 0 L11.5 8.5 L20 10 L11.5 11.5 L10 20 L8.5 11.5 L0 10 L8.5 8.5 Z" fill="currentColor"/></svg>
+      <span class="hero-star-line"></span>
+      <svg class="hero-star-icon" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 0 L11.5 8.5 L20 10 L11.5 11.5 L10 20 L8.5 11.5 L0 10 L8.5 8.5 Z" fill="currentColor"/></svg>
+      <span class="hero-star-line"></span>
+    </div>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-logo">VCC</div>
   <p class="footer-copy">© 2026 Velvet Curtain Collective, Prague. All rights reserved.</p>
-  <div class="footer-social">
-    <a href="https://www.instagram.com/velvetcurtaincollective" target="_blank" rel="noopener noreferrer">Instagram</a>
-    <a href="https://www.tiktok.com/@velvetcurtaincollective" target="_blank" rel="noopener noreferrer">TikTok</a>
-  </div>
 </footer>
 
 <script>
