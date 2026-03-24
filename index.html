@@ -773,10 +773,16 @@
   /* Team grid */
   .team-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    grid-template-columns: repeat(4, 1fr);
     gap: 2.5rem;
     max-width: 1200px;
     margin: 0 auto;
+  }
+
+
+  .member-card-placeholder {
+    visibility: hidden;
+    pointer-events: none;
   }
 
   .member-card {
@@ -1251,6 +1257,7 @@
   </div>
 
   <div class="team-grid">
+    <div class="member-card-placeholder"></div>
     <div class="member-card fade-in">
       <div class="member-photo">
         <img src="https://github.com/Marimazzotti/vcc-assets/raw/main/Amy.jpg" alt="Amy">
@@ -1272,6 +1279,7 @@
       <h3 class="member-name">Lucila</h3>
       <p class="member-skills">— Description coming soon.</p>
     </div>
+    <div class="member-card-placeholder"></div>
 
     <div class="member-card fade-in">
       <div class="member-photo">
