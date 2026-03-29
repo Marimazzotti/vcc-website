@@ -73,15 +73,16 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #ffffff;
+    background: transparent;
     transition: background 0.4s;
-    border-bottom: 1px solid rgba(0,0,0,0.1);
+    border-bottom: 1px solid transparent;
   }
 
   nav.scrolled {
     background: #ffffff;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0,0,0,0.1);
   }
 
   .nav-logo {
@@ -89,18 +90,21 @@
     font-size: 1.35rem;
     font-weight: 700;
     letter-spacing: 0.15em;
-    color: #000000;
+    color: #ffffff;
+    -webkit-text-fill-color: #ffffff;
+    background: none;
   }
 
   .initial {
     color: #ffffff;
   }
 
-  .nav-logo {
+  nav.scrolled .nav-logo {
     background: linear-gradient(to right, #530e60, #7a1590, #c0152a);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    color: #c0152a;
   }
 
   .nav-logo .initial {
@@ -116,15 +120,20 @@
 
   .nav-links a {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 0.85rem;
+    font-size: 1.05rem;
     font-weight: 600;
     letter-spacing: 0.25em;
     text-transform: uppercase;
-    color: #000000;
+    color: #ffffff;
     text-decoration: none;
-    opacity: 0.75;
+    opacity: 0.85;
     transition: opacity 0.3s, color 0.3s;
     position: relative;
+  }
+
+  nav.scrolled .nav-links a {
+    color: #000000;
+    opacity: 0.75;
   }
 
   .nav-links a::after {
@@ -134,12 +143,17 @@
     left: 0;
     width: 0;
     height: 1px;
-    background: #000000;
+    background: #ffffff;
     transition: width 0.3s;
   }
 
-  .nav-links a:hover { opacity: 1; color: #000000; }
+  nav.scrolled .nav-links a::after {
+    background: #000000;
+  }
+
+  .nav-links a:hover { opacity: 1; color: #ffffff; }
   .nav-links a:hover::after { width: 100%; }
+  nav.scrolled .nav-links a:hover { color: #000000; }
 
   /* ── HERO ── */
   #hero {
@@ -305,7 +319,7 @@
 
   .hero-eyebrow {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 0.8rem;
+    font-size: 1.5rem;
     letter-spacing: 0.55em;
     text-transform: uppercase;
     color: rgba(220,180,230,0.75);
@@ -356,7 +370,7 @@
 
   .hero-subtitle {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(1.125rem, 2vw, 1.475rem);
+    font-size: 1.8rem;
     font-weight: 400;
     font-style: italic;
     color: rgba(220,190,228,0.75);
@@ -374,7 +388,7 @@
     border: 1px solid rgba(220,180,230,0.6);
     color: rgba(220,180,230,0.9);
     font-family: 'Cormorant Garamond', serif;
-    font-size: 0.85rem;
+    font-size: 1.05rem;
     letter-spacing: 0.35em;
     text-transform: uppercase;
     text-decoration: none;
@@ -418,7 +432,7 @@
   }
 
   .scroll-indicator span {
-    font-size: 0.65rem;
+    font-size: 0.85rem;
     letter-spacing: 0.4em;
     text-transform: uppercase;
     color: rgba(220,180,230,0.5);
@@ -467,10 +481,10 @@
   }
 
   .show-inner {
-    max-width: 1100px;
+    max-width: 1300px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1.5fr;
     gap: 6rem;
     align-items: center;
     position: relative;
@@ -592,7 +606,7 @@
     border: 1px solid rgba(42,10,61,0.5);
     color: #2a0a3d;
     font-family: 'Cormorant Garamond', serif;
-    font-size: 0.75rem;
+    font-size: 0.95rem;
     letter-spacing: 0.3em;
     text-transform: uppercase;
   }
@@ -600,7 +614,7 @@
   .poster-bottom-text {
     text-align: center;
     font-family: 'Playfair Display', serif;
-    font-size: 0.75rem;
+    font-size: 0.95rem;
     letter-spacing: 0.1em;
     font-style: italic;
     font-weight: bold;
@@ -647,7 +661,7 @@
 
   .section-label {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 0.75rem;
+    font-size: 0.95rem;
     letter-spacing: 0.5em;
     text-transform: uppercase;
     color: var(--hero-accent);
@@ -663,14 +677,13 @@
   }
 
   .show-title em {
-    display: block;
     font-style: italic;
     color: var(--hero-accent);
   }
 
   .show-description {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1.275rem;
+    font-size: 1.5rem;
     font-weight: 400;
     line-height: 1.8;
     color: var(--ink);
@@ -695,7 +708,7 @@
   }
 
   .meta-label {
-    font-size: 0.65rem;
+    font-size: 1.05rem;
     letter-spacing: 0.4em;
     text-transform: uppercase;
     color: var(--mid);
@@ -703,9 +716,9 @@
 
   .meta-value {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1.1rem;
+    font-size: 1.5rem;
     color: var(--ink);
-    font-weight: 400;
+    font-weight: 700;
   }
 
   .ticket-btn {
@@ -715,7 +728,7 @@
     background: var(--purple);
     color: var(--white);
     font-family: 'Cormorant Garamond', serif;
-    font-size: 0.85rem;
+    font-size: 1.05rem;
     letter-spacing: 0.35em;
     text-transform: uppercase;
     text-decoration: none;
@@ -739,7 +752,7 @@
 
   .section-header {
     text-align: center;
-    max-width: 700px;
+    max-width: 960px;
     margin: 0 auto 5rem;
   }
 
@@ -759,7 +772,7 @@
 
   .section-text {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1.275rem;
+    font-size: 1.5rem;
     font-weight: 400;
     line-height: 1.8;
     color: var(--ink);
@@ -851,7 +864,7 @@
     z-index: 4;
     padding: 0.25rem 0.7rem;
     background: rgba(192,21,42,0.85);
-    font-size: 0.6rem;
+    font-size: 0.8rem;
     letter-spacing: 0.25em;
     text-transform: uppercase;
     color: #fdeaea;
@@ -872,7 +885,7 @@
 
   .member-skills {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1.125rem;
+    font-size: 1.5rem;
     font-weight: 400;
     color: var(--mid);
     line-height: 1.6;
@@ -895,7 +908,7 @@
   }
 
   .contact-inner {
-    max-width: 800px;
+    max-width: 1100px;
     margin: 0 auto;
     position: relative;
     z-index: 1;
@@ -919,7 +932,7 @@
 
   .contact-block p, .contact-block a {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1.125rem;
+    font-size: 1.5rem;
     color: var(--ink);
     opacity: 0.65;
     line-height: 1.8;
@@ -942,7 +955,7 @@
     align-items: center;
     gap: 0.5rem;
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1.125rem;
+    font-size: 1.5rem;
     color: var(--ink);
     opacity: 0.65;
     text-decoration: none;
@@ -980,7 +993,7 @@
   }
 
   .form-group label {
-    font-size: 0.65rem;
+    font-size: 0.85rem;
     letter-spacing: 0.35em;
     text-transform: uppercase;
     color: var(--smoke);
@@ -1050,7 +1063,7 @@
 
   .footer-logo {
     font-family: 'Playfair Display', serif;
-    font-size: 1.3rem;
+    font-size: 1.6rem;
     font-weight: 700;
     color: var(--purple);
     opacity: 0.7;
@@ -1058,7 +1071,7 @@
 
   .footer-copy {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 0.8rem;
+    font-size: 1.1rem;
     color: var(--mid);
     opacity: 0.6;
     letter-spacing: 0.15em;
@@ -1071,7 +1084,7 @@
 
   .footer-social a {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 0.75rem;
+    font-size: 1.25rem;
     letter-spacing: 0.3em;
     text-transform: uppercase;
     color: var(--mid);
@@ -1128,7 +1141,7 @@
 <!-- NAV -->
 <nav id="main-nav">
   <div class="nav-logo">
-    <span class="initial">V</span>elvet <span class="initial">C</span>urtain <span class="initial">C</span>ollective
+    <span class="initial">V</span>elvet <span class="initial">C</span>urtain <span class="initial">C</span>ollective <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" style="width:20px;height:20px;vertical-align:middle;margin-left:0.3em;"><path d="M10 0 L11.5 8.5 L20 10 L11.5 11.5 L10 20 L8.5 11.5 L0 10 L8.5 8.5 Z" fill="currentColor"/></svg>
   </div>
   <ul class="nav-links">
     <li><a href="#show">Our Show</a></li>
@@ -1209,10 +1222,7 @@
 
     <div class="show-info fade-in">
       <p class="section-label">— Coming Next</p>
-      <h2 class="show-title">
-        The Kabaret of
-        <em>Broken Dolls</em>
-      </h2>
+      <h2 class="show-title">The Kabaret of <em>Broken Dolls</em></h2>
       <p class="show-description">
        In the dim glow of a Prague cabaret, ten women take the stage — polished, precise, and perfectly controlled. 
        <br> They are dolls. But beneath the surface, something begins to shift. As music unravels the rules that once held them together, cracks form.
@@ -1236,8 +1246,10 @@
         </div>
       </div>
 
-      <span class="ticket-btn" style="opacity:0.6;cursor:default;">Tickets Coming Soon</span>
     </div>
+  </div>
+  <div style="text-align:center;margin-top:3rem;">
+    <span class="ticket-btn" style="opacity:0.6;cursor:default;">Tickets Coming Soon</span>
   </div>
 </section>
 
